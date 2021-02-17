@@ -1,20 +1,13 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: guestbook-ingress
+  name: {{ .Release.Name}}-{{ .Chart.Name }}-ingress
 spec:
   rules:
-  - host: frontend.minikube.local
+  - host: {{ .Values.ingress.host }}
     http:
       paths:
       - path: /
         backend:
-          serviceName: frontend
-          servicePort: 80
-  - host: backend.minikube.local
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: backend
+          serviceName: {{ .Release.Name }}-{{ .Chart.Name }}
           servicePort: 80
