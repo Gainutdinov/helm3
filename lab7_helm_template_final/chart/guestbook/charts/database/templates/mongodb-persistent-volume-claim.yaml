@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-{{ .Chart.Name }}-pvc
 spec:
-  storageClassName: manual
+# storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
