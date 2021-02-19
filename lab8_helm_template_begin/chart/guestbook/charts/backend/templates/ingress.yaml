@@ -2,12 +2,14 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ include "backend.fullname" . }}-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
   - host: {{ .Values.ingress.host }}
     http:
       paths:
-      - path: /*
+      - path: /
         backend:
           serviceName: {{ include "backend.fullname" . }}
           servicePort: 80
