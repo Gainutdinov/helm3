@@ -10,3 +10,6 @@ service:
   port: 80
 ingress:
   host: frontend.minikube.local
+  enabled: true
+  annotations:
+    class: "gce"

@@ -1,17 +1,17 @@
-{{- if .Values.ingress.enabled }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ include "frontend.fullname" . }}-ingress
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-ingress
   annotations: 
     kubernetes.io/ingress.class: {{ .Values.ingress.annotations.class | default "gce" | quote }}
 spec:
   rules:
-  - host: {{ .Values.ingress.host }}
+{{- range .Values.ingress.hosts }}  
+  - host: {{$.Release.Name }}.{{ .host.domain }}
     http:
       paths:
       - path: /
         backend:
-          serviceName: {{ include "frontend.fullname" . }}
-          servicePort: 80
+          serviceName: {{ $.Release.Name }}-{{ .host.chart }}
+          servicePort: 80 
 {{- end }}

@@ -17,3 +17,5 @@ service:
 ingress:
   enabled: true
   host: backend.minikube.local
+  annotations:
+    class: "gce"

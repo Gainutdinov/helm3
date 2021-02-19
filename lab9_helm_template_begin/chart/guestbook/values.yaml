@@ -3,3 +3,27 @@ backend:
     mongodb_uri:
       username: admin
       password: password
+  ingress:
+    enabled: false
+    host: backend.simpledevops.xyz
+    annotations:
+      class: "nginx"
+frontend:
+  ingress:
+    enabled: false
+    host: frontend.simpledevops.xyz
+    annotations:
+      class: "nginx"
+  config:
+    backend_uri: "http://backend.simpledevops.xyz/guestbook"
+
+ingress:
+  annotations:
+    class: "nginx"
+  hosts:
+    - host:
+        domain: frontend.simpledevops.xyz
+        chart: frontend
+    - host:
+        domain: backend.simpledevops.xyz
+        chart: backend

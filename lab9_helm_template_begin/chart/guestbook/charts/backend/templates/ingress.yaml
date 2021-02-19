@@ -1,7 +1,10 @@
+{{- if .Values.ingress.enabled }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ include "backend.fullname" . }}-ingress
+  annotations:
+    kubernetes.io/ingress.class: {{ .Values.ingress.annotations.class | default "gce" | quote }} 
 spec:
   rules:
   - host: {{ .Values.ingress.host }}
@@ -11,3 +14,4 @@ spec:
         backend:
           serviceName: {{ include "backend.fullname" . }} 
           servicePort: 80
+{{- end }}
